@@ -1,0 +1,33 @@
+**Currency Converter - Capstone Project**
+
+1. Project Setup and Technologies
+For this project, I chose a modern, high-performance stack:
+
+React: UI library for managing components and state.
+
+Vite: Next-generation build tool, chosen for its superior speed compared to Create React App.
+
+Tailwind CSS: Utility-first CSS framework for fast, responsive styling.
+
+2. Logbook: Setup and Troubleshooting
+During the initial development environment setup, I encountered and resolved several technical challenges. Here are the details of the errors and the solutions applied:
+
+Problem 1: Path incompatibility on Windows with npx
+Error: When running npx tailwindcss init -p, the terminal (PowerShell) returned the error "could not determine executable to run." This is a known path management issue on some Windows configurations.
+
+Solution: Instead of relying on npx's automation, I opted for manual configuration. I manually created the tailwind.config.js and postcss.config.js files in the project root, inserting the standard configuration code.
+
+Problem 2: Project Directory Corruption (ENOENT)
+Error: During troubleshooting, the project folder lost reference to the package.json file, causing the error ENOENT: no such file or directory.
+
+Solution: I performed a thorough cleanup. I exited the corrupted directory and initialized a new, clean project (capstone-converter) with Vite, ensuring the underlying structure was intact before proceeding.
+
+Problem 3: Tailwind CSS/PostCSS Version Conflict
+Error: After installation, Vite returned an error: It looks like you're trying to use tailwindcss directly as a PostCSS plugin.
+
+Cause: NPM downloaded the latest "experimental" or alpha version of Tailwind (v4+), which changed the PostCSS integration architecture, rendering my configuration files obsolete.
+
+Solution: I forced a downgrade to the stable, industry-standard version. I uninstalled the problematic version and specifically installed version 3.4 (npm install -D tailwindcss@3.4.17), restoring compatibility with the standard configuration.
+
+Current Status
+The environment is now stable, the Vite development server is active (npm run dev), and Tailwind CSS is properly integrated and working.
