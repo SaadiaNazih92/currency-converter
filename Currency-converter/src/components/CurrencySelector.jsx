@@ -1,0 +1,1 @@
+function CurrencySelector({ label, currencies, selectedCurrency, onChange }) 

@@ -22,3 +22,10 @@ useEffect(() => {
       setConvertedAmount((amount * exchangeRate).toFixed(2));
     }
   }, [amount, exchangeRate]);
+  return (
+    <div className="min-h-screen bg-gray-100...">
+      {/* ... */}
+         {error && <p className="text-red-500...">{error}</p>}
+      {/* ... */}
+    </div>
+  );
