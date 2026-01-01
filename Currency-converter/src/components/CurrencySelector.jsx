@@ -10,4 +10,10 @@ function CurrencySelector({ label, currencies, selectedCurrency, onChange })
         onChange={(e) => onChange(e.target.value)}
         className="..."
       ></select>
+      {currencies.map((currency) => (
+          <option key={currency} value={currency}>
+            {currency}
+          </option>
+        ))}
 }
+export default CurrencySelector;
