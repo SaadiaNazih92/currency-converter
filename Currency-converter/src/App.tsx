@@ -10,3 +10,15 @@ const [currencies, setCurrencies] = useState([]);
   const API_KEY = '513dd873d96e5f0ef40c7dd6'; 
   const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}`;
 
+useEffect(() => {
+    const fetchRates = async () => {
+      // ... codice per scaricare ...
+    };
+
+    fetchRates();
+  }, [fromCurrency, toCurrency]);
+  useEffect(() => {
+    if (exchangeRate) {
+      setConvertedAmount((amount * exchangeRate).toFixed(2));
+    }
+  }, [amount, exchangeRate]);
