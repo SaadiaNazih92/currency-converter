@@ -6,3 +6,7 @@ const [currencies, setCurrencies] = useState([]);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [error, setError] = useState(null);
+
+  const API_KEY = '513dd873d96e5f0ef40c7dd6'; 
+  const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}`;
+
