@@ -15,5 +15,6 @@ function CurrencySelector({ label, currencies, selectedCurrency, onChange })
             {currency}
           </option>
         ))}
+      
 }
 export default CurrencySelector;
