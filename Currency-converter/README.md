@@ -1,78 +1,105 @@
-**Currency Converter - Capstone Project**
+# 💱 Currency Converter - Capstone Project
 
-1. Project Setup and Technologies
-For this project, I chose a modern, high-performance stack:
-
-React: UI library for managing components and state.
-
-Vite: Next-generation build tool, chosen for its superior speed compared to Create React App.
-
-Tailwind CSS: Utility-first CSS framework for fast, responsive styling.
-
-2. Logbook: Setup and Troubleshooting
-During the initial development environment setup, I encountered and resolved several technical challenges. Here are the details of the errors and the solutions applied:
-
-Problem 1: Path incompatibility on Windows with npx
-Error: When running npx tailwindcss init -p, the terminal (PowerShell) returned the error "could not determine executable to run." This is a known path management issue on some Windows configurations.
-
-Solution: Instead of relying on npx's automation, I opted for manual configuration. I manually created the tailwind.config.js and postcss.config.js files in the project root, inserting the standard configuration code.
-
-Problem 2: Project Directory Corruption (ENOENT)
-Error: During troubleshooting, the project folder lost reference to the package.json file, causing the error ENOENT: no such file or directory.
-
-Solution: I performed a thorough cleanup. I exited the corrupted directory and initialized a new, clean project (capstone-converter) with Vite, ensuring the underlying structure was intact before proceeding.
-
-Problem 3: Tailwind CSS/PostCSS Version Conflict
-Error: After installation, Vite returned an error: It looks like you're trying to use tailwindcss directly as a PostCSS plugin.
-
-Cause: NPM downloaded the latest "experimental" or alpha version of Tailwind (v4+), which changed the PostCSS integration architecture, rendering my configuration files obsolete.
-
-Solution: I forced a downgrade to the stable, industry-standard version. I uninstalled the problematic version and specifically installed version 3.4 (npm install -D tailwindcss@3.4.17), restoring compatibility with the standard configuration.
-
-Current Status
-The environment is now stable, the Vite development server is active (npm run dev), and Tailwind CSS is properly integrated and working.
-
+**Live Demo:** [Click here to view the App on Vercel](https://currency-converter-one-mu.vercel.app/)
 
 ## 📝 Project Overview
-The application allows users to select two currencies (source and target), enter an amount, and immediately see the converted value. The data is retrieved dynamically via an external API.
 
-### 🚀 Implemented Features
-- **API Integration:** Retrieve real-time exchange rates via *ExchangeRate-API*.
-- **State Management:** Use of `useState` and `useEffect` to manage data, loading, and automatic calculations.
-- **Reusable Components:** Modular architecture with separate React components.
-- **Responsive Design:** Modern and adaptable interface (Mobile/Desktop) built with **Tailwind CSS**.
-- **Error Handling:** Visual feedback in case of network or API issues.
+This project is a modern **Single Page Application (SPA)** designed to convert currencies in real-time. It was built to demonstrate proficiency in Frontend development, specifically focusing on state management, API integration, and responsive UI design.
 
-## 🛠 Technologies Used
-- **Framework:** React (via Vite)
-- **Styling:** Tailwind CSS
-- **Language:** JavaScript (ES6+)
-- **API:** ExchangeRate-API
+The application features a custom "Earth-tone" design (Ochre/Green), distinct from standard Bootstrap/Material styles, showcasing the power of **Tailwind CSS**.
+
+### 🚀 Key Features
+- **Real-time Conversion:** Fetches live exchange rates via *ExchangeRate-API*.
+- **Smart UI:** Dynamic inputs that update calculations instantly.
+- **Swap Functionality:** A dedicated button to instantly swap source and target currencies.
+- **Custom Design:** A unique, responsive interface built with a specific color palette.
+- **Robust Error Handling:** Visual feedback for network or API errors.
+
+---
+
+## 🛠 Tech Stack
+
+I chose a modern, high-performance stack for this project:
+
+- **Core:** [React](https://react.dev/) (v18)
+- **Language:** [TypeScript](https://www.typescriptlang.org/) (Migrated from JS for type safety)
+- **Build Tool:** [Vite](https://vitejs.dev/) (chosen for superior speed over CRA)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (Utility-first framework)
+- **Deployment:** [Vercel](https://vercel.com/)
+
+---
 
 ## 📂 Component Structure
-The project is organized in the `src/components` folder:
 
-1. **`ValutaSelector.jsx`**
-- "Dumb" (presentational) component for the drop-down menu.
-- Reused twice (for the "From" currency and the "To" currency).
-- Receives the list of currencies and manages the selection change.
+The project follows a modular component-based architecture in `src/components`:
 
-2. **`QuantitaInput.jsx`**
-- Controlled input for entering the numeric amount.
-- Prevents the entry of negative values.
+1.  **`CurrencySelector.tsx`**
+    - A reusable dropdown component used for both "From" and "To" selections.
+    - Fully typed interface for props.
 
-3. **`ConversionResult.jsx`**
-- Displays the final result of the calculation.
-- Uses *conditional rendering* (appears only if there is a valid result).
+2.  **`AmountInput.tsx`**
+    - A controlled input component for handling numeric user input.
 
-4. **`App.jsx` (Main Logic)**
-- The "brain" of the application.
-- Contains the `fetch` API calls.
-- Manages the mathematical conversion logic.
+3.  **`ConversionResult.tsx`**
+    - Displays the calculated result and the current exchange rate.
+    - Uses conditional rendering to handle loading/empty states.
 
-## ⚙️ Installation and Startup
+4.  **`App.tsx` (The Brain)**
+    - Manages global state (`useState`) for amounts, currency codes, and rates.
+    - Handles side effects (`useEffect`) to fetch data from the API.
+    - Contains the conversion logic and the "Swap" function.
 
-1. Clone the repository.
-2. Install the dependencies:
-```bash
-npm install
+---
+
+## 📔 Logbook: Development & Troubleshooting
+
+This project served as a realistic simulation of a dev environment. Below is a log of key challenges encountered and resolved:
+
+### 1. Environment Setup (Windows/PowerShell)
+* **Issue:** `npx tailwindcss init -p` failed with path errors on Windows.
+* **Solution:** Manually configured `tailwind.config.js` and `postcss.config.js` instead of relying on the CLI automation.
+
+### 2. Dependency Conflicts (Tailwind v4 vs v3)
+* **Issue:** NPM installed an experimental version of Tailwind that conflicted with PostCSS.
+* **Solution:** Forced a downgrade to the stable industry standard (`npm install -D tailwindcss@3.4.17`) to restore stability.
+
+### 3. File Corruption (ENOENT)
+* **Issue:** The `package.json` reference was lost during a folder move.
+* **Solution:** Re-initialized the project structure using Vite to ensure a clean slate.
+
+### 4. Migration to TypeScript
+* **Issue:** Initially started as `.jsx`, but required stricter type safety.
+* **Solution:** Renamed all components to `.tsx`, added Interfaces for Props and API responses, and fixed strict null checks in `main.tsx`.
+
+### 5. Deployment
+* **Platform:** Deployed to Vercel via CLI.
+* **Challenge:** Ensuring the build command (`vite build`) ran correctly in the cloud environment compared to the local server.
+
+---
+
+## ⚙️ Installation and Setup
+
+If you want to run this project locally:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/SaadiaNazih92/currency-converter.git](https://github.com/SaadiaNazih92/currency-converter.git)
+    cd currency-converter
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open in browser:**
+    Click the link shown in the terminal (usually `http://localhost:5173`).
+
+---
+
+**Author:** Saadia Nazih
