@@ -1,4 +1,4 @@
-function ConversionRisultato({ convertedAmount, toCurrency }) {
+function ConversionResult({ convertedAmount, toCurrency }) {
   if (!convertedAmount || convertedAmount === 0) {
     return null;
   }
@@ -19,3 +19,4 @@ function ConversionRisultato({ convertedAmount, toCurrency }) {
     </div>
   );
 }
+export default ConversionResult;
