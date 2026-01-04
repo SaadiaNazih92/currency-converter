@@ -9,7 +9,7 @@ const AmountInput: React.FC<AmountInputProps> = ({ amount, onAmountChange }) => 
   return (
     <div className="w-full p-2">
       <label className="block text-sm font-medium text-gray-700 mb-1">
-        Importo
+        Import:
       </label>
       <input
         type="number"
