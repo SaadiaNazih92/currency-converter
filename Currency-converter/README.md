@@ -31,3 +31,48 @@ Solution: I forced a downgrade to the stable, industry-standard version. I unins
 
 Current Status
 The environment is now stable, the Vite development server is active (npm run dev), and Tailwind CSS is properly integrated and working.
+
+
+## 📝 Project Overview
+The application allows users to select two currencies (source and target), enter an amount, and immediately see the converted value. The data is retrieved dynamically via an external API.
+
+### 🚀 Implemented Features
+- **API Integration:** Retrieve real-time exchange rates via *ExchangeRate-API*.
+- **State Management:** Use of `useState` and `useEffect` to manage data, loading, and automatic calculations.
+- **Reusable Components:** Modular architecture with separate React components.
+- **Responsive Design:** Modern and adaptable interface (Mobile/Desktop) built with **Tailwind CSS**.
+- **Error Handling:** Visual feedback in case of network or API issues.
+
+## 🛠 Technologies Used
+- **Framework:** React (via Vite)
+- **Styling:** Tailwind CSS
+- **Language:** JavaScript (ES6+)
+- **API:** ExchangeRate-API
+
+## 📂 Component Structure
+The project is organized in the `src/components` folder:
+
+1. **`ValutaSelector.jsx`**
+- "Dumb" (presentational) component for the drop-down menu.
+- Reused twice (for the "From" currency and the "To" currency).
+- Receives the list of currencies and manages the selection change.
+
+2. **`QuantitaInput.jsx`**
+- Controlled input for entering the numeric amount.
+- Prevents the entry of negative values.
+
+3. **`ConversionResult.jsx`**
+- Displays the final result of the calculation.
+- Uses *conditional rendering* (appears only if there is a valid result).
+
+4. **`App.jsx` (Main Logic)**
+- The "brain" of the application.
+- Contains the `fetch` API calls.
+- Manages the mathematical conversion logic.
+
+## ⚙️ Installation and Startup
+
+1. Clone the repository.
+2. Install the dependencies:
+```bash
+npm install

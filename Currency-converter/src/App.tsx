@@ -19,12 +19,14 @@ useEffect(() => {
     };
 
     fetchRates();
-  }, [fromCurrency, toCurrency]);
+  }, [fromCurrency, toCurrency, API_KEY]);
+
   useEffect(() => {
     if (exchangeRate) {
       setConvertedAmount((amount * exchangeRate).toFixed(2));
     }
   }, [amount, exchangeRate]);
+  
   return (
     <div className="min-h-screen bg-gray-100...">
       {/* ... */}
