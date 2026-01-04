@@ -1,7 +1,7 @@
 function CurrencySelector({ label, currencies, selectedCurrency, onChange }) 
 {
     return (
-    <div className="flex flex-col w-full mb-4"></div>
+    <div className="flex flex-col w-full mb-4">
     <label className="mb-2 font-bold text-gray-700">
         {label}
       </label>
@@ -15,6 +15,7 @@ function CurrencySelector({ label, currencies, selectedCurrency, onChange })
             {currency}
           </option>
         ))}
-      
+      </div>
+    )
 }
 export default CurrencySelector;
