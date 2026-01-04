@@ -1,86 +1,81 @@
-import { useState, useEffect } from 'react';
-import ValutaSelector from './components/CrrencySelector';
-import QuantitaInput from './components/AountInput';
-import ConversionRisultato from './components/ConversionResult';
+import { useState, useEffect } from "react";
+// Corretti gli errori di battitura negli import:
+import CurrencySelector from "./components/CurrencySelector";
+import AmountInput from "./components/AmountInput";
+import ConversionResult from "./components/ConversionResult";
+
+interface ExchangeRates {
+  [key: string]: number;
+}
 
 function App() {
-  const [currencies, setCurrencies] = useState([]);
-  const [amount, setAmount] = useState(1);
-  const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("EUR");
-  const [exchangeRate, setExchangeRate] = useState(0);
-  const [convertedAmount, setConvertedAmount] = useState(0);
-  const [error, setError] = useState(null);
-
- 
-  const API_KEY = '513dd873d96e5f0ef40c7dd6'; 
-  const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}`;
-
+  // Definiamo i tipi per lo stato (TypeScript ora sa cosa aspettarsi)
+  const [currencyOptions, setCurrencyOptions] = useState<string[]>([]);
+  const [fromCurrency, setFromCurrency] = useState<string>("EUR");
+  const [toCurrency, setToCurrency] = useState<string>("USD");
+  const [amount, setAmount] = useState<number>(1);
+  const [exchangeRate, setExchangeRate] = useState<number>(0);
+  const [convertedAmount, setConvertedAmount] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRates = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/latest/${fromCurrency}`);
-        
-        if (!response.ok) {
-          throw new Error("Errore nella richiesta API");
-        }
-
-        const data = await response.json();
-        
-        setCurrencies(Object.keys(data.conversion_rates));
-        setExchangeRate(data.conversion_rates[toCurrency]);
-        setError(null);
-      } catch (err) {
-        setError("Impossibile recuperare i dati. Controlla la chiave API o la connessione.");
-        console.error(err);
-      }
-    };
-
-    fetchRates();
-  }, [fromCurrency, toCurrency, API_KEY]); 
+    fetch(`https://open.er-api.com/v6/latest/${fromCurrency}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // TypeScript ora sa che data.rates è un oggetto di numeri
+        const rates: ExchangeRates = data.rates;
+        setCurrencyOptions([...Object.keys(rates)]);
+        setExchangeRate(rates[toCurrency]);
+      })
+      .catch((error) => console.error("Errore API:", error));
+  }, [fromCurrency, toCurrency]);
 
   useEffect(() => {
-    if (exchangeRate) {
+    if (amount != null && exchangeRate) {
       setConvertedAmount((amount * exchangeRate).toFixed(2));
     }
   }, [amount, exchangeRate]);
 
+  const handleToCurrencyChange = (currency: string) => {
+    setToCurrency(currency);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center mb-6 text-blue-600">
-          Convertitore di Valuta
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
+          Convertitore Valuta
         </h1>
-        
-      
-        {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">{error}</div>}
 
-        <QuantitaInput 
-          amount={amount} 
-          onChange={setAmount} 
-        />
+        <AmountInput amount={amount} onAmountChange={setAmount} />
 
-        <div className="grid grid-cols-2 gap-4">
-          <ValutaSelector 
-            label="Da:" 
-            currencies={currencies} 
+        <div className="flex flex-col md:flex-row justify-between my-4">
+          <CurrencySelector
+            label="Da"
             selectedCurrency={fromCurrency}
-            onChange={setFromCurrency}
+            onChangeCurrency={setFromCurrency}
+            currencyOptions={currencyOptions}
           />
-          <ValutaSelector 
-            label="A:" 
-            currencies={currencies} 
+          
+          <div className="flex items-center justify-center pt-4 md:pt-0">
+            <span className="text-2xl">⇄</span>
+          </div>
+
+          <CurrencySelector
+            label="A"
             selectedCurrency={toCurrency}
-            onChange={setToCurrency}
+            onChangeCurrency={handleToCurrencyChange}
+            currencyOptions={currencyOptions}
           />
         </div>
-        <ConversionRisultato 
+
+        <ConversionResult 
           convertedAmount={convertedAmount} 
           toCurrency={toCurrency} 
         />
         
+        <div className="mt-4 text-center text-xs text-gray-400">
+          Tasso: 1 {fromCurrency} = {exchangeRate} {toCurrency}
+        </div>
       </div>
     </div>
   );
