@@ -10,8 +10,8 @@ const ConversionResult: React.FC<ConversionResultProps> = ({ convertedAmount, to
 
   return (
     <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200 text-center animate-pulse">
-      <h2 className="text-xl text-gray-600">Risultato Conversione:</h2>
-      <p className="text-3xl font-bold text-green-700 mt-2">
+      <h2 className="text-xl text-gray-600">Conversion Result:</h2>
+      <p className="text-3xl font-bold text-gray-700 mt-2">
         {convertedAmount} {toCurrency}
       </p>
     </div>

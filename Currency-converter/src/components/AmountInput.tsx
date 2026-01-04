@@ -15,7 +15,7 @@ const AmountInput: React.FC<AmountInputProps> = ({ amount, onAmountChange }) => 
         type="number"
         value={amount}
         onChange={(e) => onAmountChange(parseFloat(e.target.value) || 0)}
-        className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+        className="w-full p-2 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 shadow-sm"
         placeholder="Inserisci importo..."
       />
     </div>

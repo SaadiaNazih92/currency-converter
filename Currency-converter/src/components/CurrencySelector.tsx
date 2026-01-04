@@ -16,7 +16,7 @@ const CurrencySelector: React.FC<CurrencySelectorProps> = ({ label, selectedCurr
       <select
         value={selectedCurrency}
         onChange={(e) => onChangeCurrency(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+        className="w-full p-2 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-500 shadow-sm"
       >
         {currencyOptions.map((currency) => (
           <option key={currency} value={currency}>
