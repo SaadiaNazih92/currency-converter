@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import CurrencySelector from './components/CurrencySelector';
+import AmountInput from './components/AmountInput';
+import ConversionResul from './components/ConversionResult';
 const [currencies, setCurrencies] = useState([]);
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState("USD");
